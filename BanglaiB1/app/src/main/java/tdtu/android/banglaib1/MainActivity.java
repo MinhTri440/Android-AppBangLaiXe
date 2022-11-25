@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
     public void openHoclythuyet()
     {
         Intent intent;
@@ -101,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+
     }
 
 }

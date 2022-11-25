@@ -24,27 +24,28 @@ public class ChooseLTActivity extends AppCompatActivity {
                 imageButton1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        nexttofragment();
+                        nexttofragment("1");
                     }
                 });
         imageButton2= (ImageButton) findViewById(R.id.imageButton2);
         imageButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nexttofragment2();
+                nexttofragment("2");
             }
         });
     }
-    public void nexttofragment()
+    public void nexttofragment(String loai)
     {
         Intent intent;
         intent = new Intent(this,SlideLTActivity.class);
+        intent.putExtra("key",loai);
         startActivity(intent);
     }
-    public void nexttofragment2()
-    {
-        Intent intent;
-        intent = new Intent(this,SlideLT_liet_Activity.class);
-        startActivity(intent);
-    }
+//    public void nexttofragment2()
+//    {
+//        Intent intent;
+//        intent = new Intent(this,SlideLT_liet_Activity.class);
+//        startActivity(intent);
+//    }
 }

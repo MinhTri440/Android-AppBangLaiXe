@@ -17,7 +17,7 @@ public class SlideLTActivity extends FragmentActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 30;
+    private static int NUM_PAGES;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -33,6 +33,7 @@ public class SlideLTActivity extends FragmentActivity {
     private PagerAdapter pagerAdapter;
     private List<Lythuyet> mData;
     private DataHelper mDbHelper;
+    private String value;
 
 
 //nền cua cac slide
@@ -40,11 +41,31 @@ public class SlideLTActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_ltactivity);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            value = extras.getString("key");
+            //The key argument here must match that used in the other activity
+        }
+        if(value.equals("1"))
+        {
+            mDbHelper = new DataHelper(this);
+            mDbHelper.createDefaultLythuyet();
+            mData = mDbHelper.getAllLythuyet();
+            NUM_PAGES=30;
+
+        }
+        else
+        {
+            mDbHelper = new DataHelper(this);
+            mDbHelper.createDefaultLythuyet();
+            mData = mDbHelper.getAllLythuyetliet();
+            NUM_PAGES=mDbHelper.getLythuyetsLIETCount();
+        }
         mDbHelper = new DataHelper(this);
         mDbHelper.createDefaultLythuyet();
         mData = mDbHelper.getAllLythuyet();
         // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pager3);
         //set adapter giong nhu listview
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());

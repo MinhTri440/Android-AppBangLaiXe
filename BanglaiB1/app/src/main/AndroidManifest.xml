@@ -36,13 +36,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SlideLT_liet_Activity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".SlideLTActivity"
             android:exported="false">
             <meta-data

@@ -8,8 +8,14 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,8 +30,13 @@ public class SlideDe1Activity extends FragmentActivity {
     private ViewPager mPager;
     //Bien cua fragment
     private PagerAdapter pagerAdapter;
+    private TextView timeText;
+    private Button submit;
     private List<Lythuyet> mData;
     private DataHelper mDbHelper;
+    private CountDownTimer countDownTimer;
+    private long TimeOfTest=600000*3;
+    private boolean timeRunning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +51,81 @@ public class SlideDe1Activity extends FragmentActivity {
         pagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setPageTransformer(true, new ZoomOutPageTransformer());
         mPager.setAdapter(pagerAdapter);
+        timeText = (TextView) findViewById(R.id.timetest);
+        startTime();
+        submit = (Button) findViewById(R.id.textView21);
+        //check dap an
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int count=0;
+                for (Lythuyet e: mData) {
+                    if(e.getCaudung().equals(e.getTraloi()))
+                    {
+                        count++;
+                    }
+
+                }
+                countDownTimer.cancel();
+                openKetqua(count);
+
+            }
+        });
+    }
+    public void openKetqua(int count)
+    {
+        Intent intent;
+        intent = new Intent(this,ChooseLTActivity.class);
+        intent.putExtra("caudung",count);
+        startActivity(intent);
+    }
+    //bat dau thoi gian lam
+    public void startTime()
+    {
+        countDownTimer = new CountDownTimer(TimeOfTest,1000) {
+            @Override
+            public void onTick(long l) {
+                TimeOfTest=l;
+                updateTime();
+                timeRunning=true;
+
+            }
+
+            @Override
+            public void onFinish() {
+                timeRunning=false;
+            }
+        }.start();
+
+    }
+    //cap nhat thoi gian
+    public void updateTime()
+    {
+        int minutes=(int) TimeOfTest/60000;
+        int second= (int) TimeOfTest % 60000 / 1000;
+        String time;
+        time=""+minutes+":";
+        if(second<10) time+="0";
+        time+=second;
+        timeText.setText(time);
     }
     public List<Lythuyet> getData()
     {
         return  mData;
+    }
+    public void LuuTraLoi(String de,String traloi)
+    {
+        for (Lythuyet l: mData
+             ) {
+            if(l.getDe().equals(de))
+            {
+                l.setTraloi(traloi);
+                break;
+            }
+
+        }
+
     }
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         public ScreenSlidePagerAdapter(FragmentManager fm) {

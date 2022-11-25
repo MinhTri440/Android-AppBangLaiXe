@@ -28,4 +28,5 @@ public class De1Activity extends AppCompatActivity {
         intent = new Intent(this,SlideDe1Activity.class);
         startActivity(intent);
     }
+
 }

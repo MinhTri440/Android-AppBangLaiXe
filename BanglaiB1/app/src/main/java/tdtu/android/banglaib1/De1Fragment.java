@@ -1,5 +1,6 @@
 package tdtu.android.banglaib1;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.security.acl.Group;
 import java.util.List;
 
 
@@ -27,7 +30,8 @@ public class De1Fragment extends Fragment {
     private RadioButton a,b,c,d;
     private ImageView hinh;
     private Context context;
-    private Button toolbar;
+    private RadioGroup group;
+    private RadioButton radioButton;
 
     public De1Fragment() {
         // Required empty public constructor
@@ -56,14 +60,40 @@ public class De1Fragment extends Fragment {
         b= (RadioButton) rootView.findViewById(R.id.textView6);
         c= (RadioButton) rootView.findViewById(R.id.textView8);
         d= (RadioButton) rootView.findViewById(R.id.textView9);
-        toolbar = rootView.findViewById(R.id.button);
-        toolbar.setOnClickListener(new View.OnClickListener() {
+        group= (RadioGroup) rootView.findViewById(R.id.group);
+        group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),ChooseLTActivity.class);
-                startActivity(intent);
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(R.id.textViewrow3==i)
+                {
+                    SlideDe1Activity slideDe1Activity = (SlideDe1Activity) getActivity();
+
+                    slideDe1Activity.LuuTraLoi(mdata.get(mPageNumber).getDe(),mdata.get(mPageNumber).getA());
+                }
+                else if(R.id.textView6==i)
+                {
+                    SlideDe1Activity slideDe1Activity = (SlideDe1Activity) getActivity();
+                    slideDe1Activity.LuuTraLoi(mdata.get(mPageNumber).getDe(),mdata.get(mPageNumber).getB());
+                }
+                else if(R.id.textView8==i)
+                {
+                    SlideDe1Activity slideDe1Activity = (SlideDe1Activity) getActivity();
+                    slideDe1Activity.LuuTraLoi(mdata.get(mPageNumber).getDe(),mdata.get(mPageNumber).getC());
+                }
+                else if(R.id.textView9==i)
+                {
+                    SlideDe1Activity slideDe1Activity = (SlideDe1Activity) getActivity();
+                    slideDe1Activity.LuuTraLoi(mdata.get(mPageNumber).getDe(),mdata.get(mPageNumber).getD());
+                }
+                else
+                {
+                    ;
+                }
+
+
             }
         });
+
 
 
 
@@ -114,6 +144,8 @@ public class De1Fragment extends Fragment {
             d.setText("d. "+mdata.get(mPageNumber).getD());
 
         }
+
     }
+
 
 }

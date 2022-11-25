@@ -12,6 +12,7 @@ public class Lythuyet {
     private int bode;
     private int socau;
     private int cauliet;
+    private String traloi;
 
     public Lythuyet() {
     }
@@ -29,7 +30,7 @@ public class Lythuyet {
         this.socau = socau;
         this.cauliet = cauliet;
     }
-    public Lythuyet( String de, String hinh, String a, String b, String c, String d, String caudung, int bode, int socau, int cauliet) {
+    public Lythuyet( String de, String hinh, String a, String b, String c, String d, String caudung, int bode, int socau, int cauliet,String traloi) {
         this.de = de;
         this.hinh = hinh;
         this.a = a;
@@ -40,6 +41,15 @@ public class Lythuyet {
         this.bode = bode;
         this.socau = socau;
         this.cauliet = cauliet;
+        this.traloi=traloi;
+    }
+
+    public String getTraloi() {
+        return traloi;
+    }
+
+    public void setTraloi(String traloi) {
+        this.traloi = traloi;
     }
 
     public int getCau() {
@@ -144,6 +154,7 @@ public class Lythuyet {
                 ", bode=" + bode +
                 ", socau=" + socau +
                 ", cauliet=" + cauliet +
+                ", traloi='" + traloi + '\'' +
                 '}';
     }
 }
