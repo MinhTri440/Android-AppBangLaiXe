@@ -41,6 +41,7 @@ public class SlideLTActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slide_ltactivity);
+        //lay du lieu theo loại lý thuyết
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             value = extras.getString("key");
@@ -61,9 +62,6 @@ public class SlideLTActivity extends FragmentActivity {
             mData = mDbHelper.getAllLythuyetliet();
             NUM_PAGES=mDbHelper.getLythuyetsLIETCount();
         }
-        mDbHelper = new DataHelper(this);
-        mDbHelper.createDefaultLythuyet();
-        mData = mDbHelper.getAllLythuyet();
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager3);
         //set adapter giong nhu listview
